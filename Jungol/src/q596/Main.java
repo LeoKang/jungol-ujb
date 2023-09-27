@@ -13,7 +13,7 @@ public class Main {
 //		System.out.println(inp);
 
 		if (str.length() < inp) {
-			for (int i = str.length() - 1, c = 0; i >= 0; i--, c++) {
+			for (int i = str.length() - 1; i >= 0; i--) {
 				System.out.print(str.charAt(i));
 			}
 		} else {
