@@ -11,13 +11,21 @@ public class Main {
 		do {
 			inp = sc.next().charAt(0);
 
-			if (65 <= inp && inp <= 122) { // 알파벳 인 경우
+			if (Character.isAlphabetic(inp)) {
 				System.out.println(inp);
-			} else if ('0' <= inp && inp <= '9') {
+			} else if (Character.isDigit(inp)) {
 				System.out.printf("%d\n", (int) inp);
 			} else {
 				b = false;
 			}
+
+//			if (65 <= inp && inp <= 122) { // 알파벳 인 경우
+//				System.out.println(inp);
+//			} else if ('0' <= inp && inp <= '9') {
+//				System.out.printf("%d\n", (int) inp);
+//			} else {
+//				b = false;
+//			}
 		} while (b);
 		sc.close();
 
