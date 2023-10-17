@@ -9,18 +9,24 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Main implements ActionListener {
-	private String M_ID = "greencomp", M_PWD = "green1234";
+//	private String M_ID = "greencomp", M_PWD = "green1234";
 	private Button btn;
 	private TextField tfMsg;
 	TextField id, pwd;
 	private MemberDAO dao;
+	private Frame f, mainFrame;
 
 	public Main() {
 		dao = new MemberDAO();
-		Frame f = new Frame("Login");
+		f = new Frame("Login");
 		f.setSize(330, 150);
 //		f.setLayout(new FlowLayout());
 		f.setLayout(null);
+
+		mainFrame = new Frame("MAIN");
+		mainFrame.setSize(400, 300);
+		mainFrame.setLocation(10, 20);
+		mainFrame.setVisible(false);
 
 		Label lid = new Label("ID : ", Label.RIGHT);
 		lid.setBounds(20, 20, 50, 50);
@@ -50,7 +56,8 @@ public class Main implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		Main tft = new Main();
+//		Main tft = new Main();
+		new Main();
 	}
 
 	@Override
@@ -60,9 +67,11 @@ public class Main implements ActionListener {
 		System.out.println(id.getText());
 		if (!id.getText().equals("") && !pwd.getText().equals("")) {
 			ArrayList<MemberVo> ar = dao.list(id.getText());
-			if(ar.size() != 0 && ar.get(0).getPwd().equals(pwd.getText())) {
-				tfMsg.setText("로그인이 되었습니다.");	
-			}else {
+			if (ar.size() != 0 && ar.get(0).getPwd().equals(pwd.getText())) {
+				tfMsg.setText("로그인이 되었습니다.");
+				mainFrame.setVisible(true);
+				f.setVisible(false);
+			} else {
 				tfMsg.setText("로그인이 실패하였습니다.");
 			}
 		} else {
