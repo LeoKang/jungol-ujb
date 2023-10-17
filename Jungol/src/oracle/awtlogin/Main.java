@@ -60,7 +60,7 @@ public class Main implements ActionListener {
 		System.out.println(id.getText());
 		if (!id.getText().equals("") && !pwd.getText().equals("")) {
 			ArrayList<MemberVo> ar = dao.list(id.getText());
-			if(ar.size() != 0) {
+			if(ar.size() != 0 && ar.get(0).getPwd().equals(pwd.getText())) {
 				tfMsg.setText("로그인이 되었습니다.");	
 			}else {
 				tfMsg.setText("로그인이 실패하였습니다.");
