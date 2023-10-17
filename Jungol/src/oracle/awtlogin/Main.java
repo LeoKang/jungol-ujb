@@ -6,14 +6,17 @@ import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Main implements ActionListener {
 	private String M_ID = "greencomp", M_PWD = "green1234";
 	private Button btn;
 	private TextField tfMsg;
 	TextField id, pwd;
+	private MemberDAO dao;
 
 	public Main() {
+		dao = new MemberDAO();
 		Frame f = new Frame("Login");
 		f.setSize(330, 150);
 //		f.setLayout(new FlowLayout());
@@ -55,8 +58,13 @@ public class Main implements ActionListener {
 		// TODO Auto-generated method stub
 		System.out.println("click!!!");
 		System.out.println(id.getText());
-		if (id.getText().equals(M_ID) && pwd.getText().equals(M_PWD)) {
-			tfMsg.setText("로그인이 되었습니다.");
+		if (!id.getText().equals("") && !pwd.getText().equals("")) {
+			ArrayList<MemberVo> ar = dao.list(id.getText());
+			if(ar.size() != 0) {
+				tfMsg.setText("로그인이 되었습니다.");	
+			}else {
+				tfMsg.setText("로그인이 실패하였습니다.");
+			}
 		} else {
 			tfMsg.setText("틀렸습니다.");
 		}
